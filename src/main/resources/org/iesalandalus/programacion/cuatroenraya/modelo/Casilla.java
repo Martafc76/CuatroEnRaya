@@ -1,4 +1,4 @@
-package uml;
+package org.iesalandalus.programacion.cuatroenraya.modelo;
 
 public class Casilla {
 	public Ficha ficha;
@@ -30,14 +30,7 @@ public class Casilla {
 
 	@Override
 	public String toString() {
-		if(ficha == Ficha.AZUL) {
-			return String.format("%s", "A");
-		}
-		else if(ficha == Ficha.VERDE) {
-			return String.format("%s", "V");
-		} else {
-			return null;
-		}
+		return String.format("%s", ficha == null ? " " : ficha.name().charAt(0));
 	}
 
 	
