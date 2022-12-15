@@ -1,14 +1,12 @@
 package org.iesalandalus.programacion.cuatroenraya.modelo;
 
-import org.apache.commons.math3.exception.NullArgumentException;
-
 public class Jugador {
 	private String nombre;
-	private Ficha colorFicha;
+	private Ficha colorFichas;
 	
-	public Jugador(String nombre, Ficha colorFicha) {
+	public Jugador(String nombre, Ficha colorFichas) {
 		setNombre(nombre);
-		setFicha(colorFicha);
+		setFicha(colorFichas);
 	}
 	
 	
@@ -18,15 +16,30 @@ public class Jugador {
 	}
 	private void setNombre(String nombre) {
 		if(nombre == null) {
-			throw new NullPointerException("El nombre no puede ser nulo");
+			throw new NullPointerException("ERROR: El nombre no puede ser nulo.");
 		}
+		
+		if(nombre.isBlank()) {
+			throw new IllegalArgumentException("ERROR: El nombre no puede estar vacío.");
+		}
+		
 		this.nombre = nombre;
 	}
-	public Ficha getFicha() {
-		return colorFicha;
+	public Ficha getColorFichas() {
+		return colorFichas;
 	}
-	private void setFicha(Ficha colorFicha) {
-		this.colorFicha = ficha;
+	private void setFicha(Ficha colorFichas) {
+		if(colorFichas == null) {
+			throw new NullPointerException("ERROR: El color de las fichas no puede ser nulo.");
+		}
+		this.colorFichas = colorFichas;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return String.format("%s (%s)", nombre, colorFichas);
 	}
 	
 	
