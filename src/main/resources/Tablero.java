@@ -15,7 +15,7 @@ public class Tablero {
 	private boolean columnaVacia(int columna) {
 		boolean estaVacia = true;
 		for (int i = 0; i < casillas.length; i++) {
-			if (casillas[i][columna] != null) {
+			if ( != null) { //con if compruebo
 				estaVacia = false;
 			}
 		}
@@ -61,5 +61,76 @@ public class Tablero {
 			throw new NullPointerException("La ficha no puede ser nula");
 		}
 	}
+	
+	private void comprobarColumna(int columna) {
+		if(columna < 0 || columna > COLUMNAS) {
+			throw new IllegalArgumentException("La columna no es válida");
+		}
+	}
+	
+	private int getPrimeraFilaVacia(int columna) {
+		for (int i = FILAS - 1; i >= 0; i--) {
+			if(casillas[i][columna] == null) {
+				return i;
+			}
+		}
+		return FILAS -1;
+	}
+	
+	private boolean objetivoAlcanzado(int numFichasConsecutivas) {
+		if(numFichasConsecutivas >= FICHAS_IGUALES_CONSECUTIVAS_NECESARIAS) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean comprobarHorizontal(Ficha ficha, int fila) {
+		int contFicha = 0;
+		for (int i = 0; i < casillas[fila].length; i++) {
+			if(casillas[fila][i].getFicha() == ficha) {
+				contFicha++;
+			} else {
+				contFicha = 0;
+			}
+		}
+		if(contFicha == 4) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	private boolean comprobarVertical(int columna, Ficha ficha) {
+		int contFicha = 0;
+		for (int i = 0; i < casillas[columna].length; i++) {
+			if(casillas[i][columna].getFicha() == ficha) {
+				contFicha++;
+			} else {
+				contFicha = 0;
+			}
+		}
+		if(contFicha == 4) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private int menor(int fila, int columna) {
+		if(fila < columna) {
+			return fila;
+		} else {
+			return columna;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
